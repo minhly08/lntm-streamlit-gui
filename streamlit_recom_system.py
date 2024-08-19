@@ -44,12 +44,12 @@ def get_recommendations(comments_score,hotel_info,reviewer_name,trainset,algorit
     # return result_df[['Reviewer ID_new', 'Hotel_Name', 'predicted_score']].iloc[:num+1]
     return result_df[['Hotel_Name','Hotel_ID','Hotel_Description','Hotel_Address','Total_Score','Hotel_Rank','predicted_score']].iloc[:num]
 
-hotels_id_pkl = r"C:\Users\minhl\OneDrive\Documents\#Learning\1. TTTH DHKHTN\Data Science Certificate ver 2024 1\7_Final Project\Project 2\hotels_id.pkl"
-algo_pkl = r"C:\Users\minhl\OneDrive\Documents\#Learning\1. TTTH DHKHTN\Data Science Certificate ver 2024 1\7_Final Project\Project 2\surprise_model_algo.pkl"
-trainset_pkl = r"C:\Users\minhl\OneDrive\Documents\#Learning\1. TTTH DHKHTN\Data Science Certificate ver 2024 1\7_Final Project\Project 2\surprise_model_trainset.pkl"
+hotels_id_pkl = "hotels_id.pkl"
+algo_pkl = "surprise_model_algo.pkl"
+trainset_pkl = "surprise_model_trainset.pkl"
 
-comments = r"C:\Users\minhl\OneDrive\Documents\#Learning\1. TTTH DHKHTN\Data Science Certificate ver 2024 1\7_Final Project\Project 2\comments_score.csv"
-info = r"C:\Users\minhl\OneDrive\Documents\#Learning\1. TTTH DHKHTN\Data Science Certificate ver 2024 1\7_Final Project\Project 2\hotel_info.csv"
+comments = "comments_score.csv"
+info = "hotel_info.csv"
 df_comments = pd.read_csv(comments)
 df_info = pd.read_csv(info)
 
@@ -61,8 +61,8 @@ with open(algo_pkl, 'rb') as f:
 with open(trainset_pkl, 'rb') as f:
     trainset_new = pickle.load(f)
     
-test = get_recommendations(df_comments,df_info,reviewer_name='Abhishek',trainset=trainset_new,algorithm=algo_new,hotels_id=hotels_id_new, num=5)
-print(test)
+# test = get_recommendations(df_comments,df_info,reviewer_name='Abhishek',trainset=trainset_new,algorithm=algo_new,hotels_id=hotels_id_new, num=5)
+# print(test)
 
 # Hiển thị đề xuất ra bảng
 def display_recommended_hotels(recommended_hotels, cols):
