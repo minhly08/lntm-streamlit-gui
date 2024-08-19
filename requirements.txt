@@ -9,3 +9,4 @@ dataprep
 pyspark
 surprise
 underthesea
+maturin
