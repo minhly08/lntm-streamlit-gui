@@ -6,7 +6,6 @@ seaborn
 scikit-learn
 wordcloud
 dataprep
-genism
 pyspark
 surprise
 underthesea
