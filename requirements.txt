@@ -10,3 +10,4 @@ pyspark
 surprise
 underthesea
 maturin
+gensim
