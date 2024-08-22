@@ -259,12 +259,37 @@ elif choice == 'Content-based Filtering':
                 plt.xlabel('Score')
                 plt.ylabel('Frequency')
                 st.pyplot(plt)
-                
-                average_scores = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Room Type')['Score'].mean().reset_index()
-                pd.options.display.float_format = '{:,.2f}'.format
-                average_scores['Score'] = average_scores['Score'].apply(lambda x: '{:,.2f}'.format(x))
+            
+                average_scores_room = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Room Type')['Score'].mean().sort_values(ascending=False).reset_index()
+                pd.options.display.float_format = '{:,.1f}'.format
+                average_scores_room['Score'] = average_scores_room['Score'].apply(lambda x: '{:,.1f}'.format(x))
+                # Display the average scores in Streamlit
                 st.write("Điểm số trung bình loại phòng")
-                st.table(average_scores)
+                st.table(average_scores_room)
+                
+                average_scores_group = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Group Name')['Score'].mean().sort_values(ascending=False).reset_index()
+                pd.options.display.float_format = '{:,.1f}'.format
+                average_scores_group['Score'] = average_scores_group['Score'].apply(lambda x: '{:,.1f}'.format(x))
+                # Display the average scores in Streamlit
+                st.write("Điểm số trung bình của nhóm lưu trú")
+                st.table(average_scores_group)
+                
+                df_comments_full['Reviewer Name_Nationality'] = df_comments_full['Reviewer Name'] + "-" + df_comments_full['Nationality']
+                count_reviewer_score = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Score Level')['Reviewer Name_Nationality'].count().sort_values(ascending=False).reset_index()
+                pd.options.display.float_format = '{:,.0f}'.format
+                count_reviewer_score['Count Reviewer'] = count_reviewer_score['Reviewer Name_Nationality'].apply(lambda x: '{:,.0f}'.format(x))
+                # Display the average scores in Streamlit
+                st.write("Số người phản hồi theo review:")
+                st.table(count_reviewer_score[['Score Level','Count Reviewer']])
+                
+                df_comments_full['Stay Details_Night'] = df_comments_full['Stay Details'].str.replace('Đã ở ', '').str.split(pat = ' ', expand = True)[0].astype(int)
+                average_night_stay = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Group Name')['Stay Details_Night'].mean().sort_values(ascending=False).reset_index()
+                pd.options.display.float_format = '{:,.0f}'.format
+                average_night_stay['Stay Details_Night'] = average_night_stay['Stay Details_Night'].apply(lambda x: '{:,.0f}'.format(x))
+                # Display the average scores in Streamlit
+                st.write("Số đêm ở trung bình theo nhóm lưu trú")
+                st.table(average_night_stay)
+                
         else:
             st.write(f"Không tìm thấy khách sạn với ID: {st.session_state.selected_hotel_id}")
     
@@ -380,12 +405,35 @@ elif choice == 'Collaborative Filtering':
             plt.ylabel('Frequency')
             st.pyplot(plt)
             
-            average_scores = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Room Type')['Score'].mean().reset_index()
-            pd.options.display.float_format = '{:,.2f}'.format
-            average_scores['Score'] = average_scores['Score'].apply(lambda x: '{:,.2f}'.format(x))
+            average_scores_room = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Room Type')['Score'].mean().sort_values(ascending=False).reset_index()
+            pd.options.display.float_format = '{:,.1f}'.format
+            average_scores_room['Score'] = average_scores_room['Score'].apply(lambda x: '{:,.1f}'.format(x))
             # Display the average scores in Streamlit
             st.write("Điểm số trung bình loại phòng")
-            st.table(average_scores)
+            st.table(average_scores_room)
+            
+            average_scores_group = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Group Name')['Score'].mean().sort_values(ascending=False).reset_index()
+            pd.options.display.float_format = '{:,.1f}'.format
+            average_scores_group['Score'] = average_scores_group['Score'].apply(lambda x: '{:,.1f}'.format(x))
+            # Display the average scores in Streamlit
+            st.write("Điểm số trung bình của nhóm lưu trú")
+            st.table(average_scores_group)
+            
+            df_comments_full['Reviewer Name_Nationality'] = df_comments_full['Reviewer Name'] + "-" + df_comments_full['Nationality']
+            count_reviewer_score = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Score Level')['Reviewer Name_Nationality'].count().sort_values(ascending=False).reset_index()
+            pd.options.display.float_format = '{:,.0f}'.format
+            count_reviewer_score['Count Reviewer'] = count_reviewer_score['Reviewer Name_Nationality'].apply(lambda x: '{:,.0f}'.format(x))
+            # Display the average scores in Streamlit
+            st.write("Số người phản hồi theo review:")
+            st.table(count_reviewer_score[['Score Level','Count Reviewer']])
+            
+            df_comments_full['Stay Details_Night'] = df_comments_full['Stay Details'].str.replace('Đã ở ', '').str.split(pat = ' ', expand = True)[0].astype(int)
+            average_night_stay = df_comments_full[(df_comments_full['Hotel ID']==st.session_state.selected_hotel_id)].groupby('Group Name')['Stay Details_Night'].mean().sort_values(ascending=False).reset_index()
+            pd.options.display.float_format = '{:,.0f}'.format
+            average_night_stay['Stay Details_Night'] = average_night_stay['Stay Details_Night'].apply(lambda x: '{:,.0f}'.format(x))
+            # Display the average scores in Streamlit
+            st.write("Số đêm ở trung bình theo nhóm lưu trú")
+            st.table(average_night_stay)
         
     else:
         st.write(f"Không tìm thấy khách lưu trú với tên {st.session_state.selected_user_name} và quốc tịch {st.session_state.selected_user_nationality}")
