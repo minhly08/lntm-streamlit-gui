@@ -152,7 +152,7 @@ if choice == 'Home':
 
 elif choice == 'Capstone Project':    
     st.subheader("[Đồ án TN Data Science](https://csc.edu.vn/data-science-machine-learning/Do-An-Tot-Nghiep-Data-Science---Machine-Learning_229)")
-    st.write("""CHỦ ĐỀ 2: HOTEL RECOMMENDATION SYSTEM - COLLABORARIVE ANALYSIS \n
+    st.write("""CHỦ ĐỀ 2: HOTEL RECOMMENDATION SYSTEM\n
     HỌC VIÊN: LÝ NGỌC TƯỜNG MINH \n
     NỘI DUNG: GỢI Ý CHO KHÁCH CÁC KHÁCH SẠN DỰA TRÊN LỊCH SỬ ĐÁNH GIÁ CỦA KHÁCH \n
     HƯỚNG DẪN SỬ DỤNG: NHẬP TÊN VÀ QUÓC TỊCH ĐỂ LẤY CÁC KHÁCH SẠN GỢI Ý""")
