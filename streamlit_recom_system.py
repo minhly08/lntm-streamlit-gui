@@ -4,10 +4,6 @@ import pickle
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import seaborn as sns
-from geopy.geocoders import Nominatim
-import folium
-from streamlit_folium import st_folium
-
 
 comments = "comments_score.csv"
 info = "hotel_info.csv"
